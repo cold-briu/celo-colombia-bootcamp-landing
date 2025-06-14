@@ -7,13 +7,13 @@
 
 :root {
     --mint: #00FF9F;
-    --cyan: #00C6EC;
+    --cyan: #7cacd9;
     --electric-blue: #005CFF;
-    --violet: #4C12FF;
-    --purple: #C200FF;
-    --magenta: #D600FF;
-    --bg-dark: #0A0A0A;
-    --bg-card: #141414;
+    --violet: rgba(76, 18, 255, 0.8);
+    --purple: rgba(194, 0, 255, 0.8);
+    --magenta: rgba(214, 0, 255, 0.8);
+    --bg-dark: #1e002b;
+    --bg-card: #1e002b;
     --text-primary: #FFFFFF;
     --text-secondary: #B3B3B3;
 }
@@ -59,18 +59,49 @@ body {
 .cta-button {
     display: inline-block;
     padding: 15px 30px;
-    background-color: var(--mint);
+    background-color: #fefb5d;
     color: var(--bg-dark);
     text-decoration: none;
     border-radius: 30px;
     font-weight: bold;
     transition: all 0.3s ease;
     font-size: 1.1rem;
+    position: relative;
+    overflow: hidden;
 }
 
 .cta-button:hover {
     transform: translateY(-3px);
-    box-shadow: 0 4px 15px rgba(0, 255, 159, 0.3);
+    box-shadow: 0 4px 15px rgba(254, 251, 93, 0.3);
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background-color: #fefb5d;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+@keyframes particle-flow {
+    0% {
+        transform: translate(0, 0);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: translate(calc(cos(var(--angle)) * var(--distance)),
+                calc(sin(var(--angle)) * var(--distance)));
+        opacity: 0;
+    }
+}
+
+.cta-container {
+    position: relative;
+    display: inline-block;
+    margin: 20px 0;
 }
 
 /* About Section */
@@ -82,7 +113,7 @@ body {
 .about h2 {
     text-align: center;
     margin-bottom: 40px;
-    color: var(--cyan);
+    color: var(--text-primary);
     font-size: 2.2rem;
 }
 
@@ -104,6 +135,16 @@ body {
     color: var(--text-secondary);
 }
 
+.about-content a {
+    color: var(--magenta);
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.about-content a:hover {
+    opacity: 0.8;
+}
+
 /* Agenda Section */
 .agenda {
     padding: 80px 0;
@@ -113,14 +154,13 @@ body {
 .agenda h2 {
     text-align: center;
     margin-bottom: 20px;
-    color: var(--bg-dark);
+    color: var(--text-primary);
     font-size: 2.2rem;
-    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
 }
 
 .agenda-format {
     text-align: center;
-    color: var(--bg-dark);
+    color: var(--text-primary);
     margin-bottom: 40px;
     font-size: 1.1rem;
     opacity: 0.9;
@@ -193,7 +233,7 @@ body {
 .collapsible {
     max-width: 1000px;
     margin: 0 auto;
-    background: var(--bg-card);
+    background: linear-gradient(135deg, var(--violet) 0%, var(--magenta) 100%);
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     overflow: hidden;
@@ -202,7 +242,7 @@ body {
 .collapsible-btn {
     width: 100%;
     padding: 25px 30px;
-    background-color: var(--bg-card);
+    background: transparent;
     color: var(--text-primary);
     border: none;
     cursor: pointer;
@@ -212,14 +252,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .collapsible-btn::after {
     content: '+';
     font-size: 1.5rem;
     transition: transform 0.3s ease;
-    color: var(--cyan);
+    color: var(--text-primary);
 }
 
 .collapsible-btn.active::after {
@@ -234,7 +274,7 @@ body {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease;
-    background-color: var(--bg-card);
+    background: transparent;
     padding: 0 30px;
 }
 
@@ -247,8 +287,8 @@ body {
     margin-bottom: 15px;
     padding-left: 20px;
     position: relative;
-    color: var(--text-secondary);
-    line-height: 1.6;
+    color: var(--text-primary);
+    opacity: 0.9;
 }
 
 .conduct-rules li:before {
@@ -261,10 +301,9 @@ body {
 
 .conduct-agreement {
     padding: 20px 0;
+    color: var(--text-primary);
+    opacity: 0.9;
     font-style: italic;
-    color: var(--text-secondary);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    margin-top: 20px;
 }
 
 /* Footer */
